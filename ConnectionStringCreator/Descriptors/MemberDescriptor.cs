@@ -48,7 +48,7 @@ namespace ConnectionStringCreator.Descriptors
 
 
         public string MemberName { get; private set; }
-        public string Name { get; }
+        public string Name { get; set; }
 
         public MemberDescriptor Map(object value, object mappedValue)
         {
@@ -96,7 +96,7 @@ namespace ConnectionStringCreator.Descriptors
             this.currentValue = value;
         }
 
-        public string Name { get; }
+        public string Name { get; set; }
 
         public bool ShouldBeIgnored(object value)
         {
