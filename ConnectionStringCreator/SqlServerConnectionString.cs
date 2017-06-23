@@ -6,7 +6,7 @@
         protected override string Separator { get { return ";"; } }
 
 
-        public bool? Encrypt { get; private set; }
+        public bool? Encrypt { get; set; }
         public bool IntegratedSecurity { get; set; }
         public bool? MultipleActiveResultSets { get; set; }
         public bool? TrustedConnection { get; set; }

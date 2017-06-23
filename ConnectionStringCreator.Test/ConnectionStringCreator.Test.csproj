@@ -56,6 +56,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Builders\SqlServerConnectionStringBuilderShould.cs" />
     <Compile Include="ConnectionStrings\SqlServerConnectionStringShould.cs" />
     <Compile Include="ConnectionStrings\MySqlConnectionStringShould.cs" />
     <Compile Include="Descriptors\MemberDescriptorShould.cs" />

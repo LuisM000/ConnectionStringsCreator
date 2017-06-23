@@ -141,6 +141,52 @@ namespace ConnectionStringCreator.Test.Descriptors
             Assert.AreEqual("mapped value", propertyValue);
         }
 
+
+        [TestMethod]
+        public void ignore_with_exactly_value()
+        {
+            Foo foo = new Foo()
+            {
+                Bar = "value that is ignored"
+            };
+            var member = ReflectionHelper.GetMemberExpression<Foo>(f => f.Bar);
+            MemberDescriptor memberDescriptor = new MemberDescriptor(member, "dummyName", "value that is ignored");
+
+            bool isIgnored = memberDescriptor.ShouldBeIgnoredWithValue("value that is ignored");
+
+            Assert.IsTrue(isIgnored);
+        }
+
+        [TestMethod]
+        public void no_ignore_with_exactly_value()
+        {
+            Foo foo = new Foo()
+            {
+                Bar = "value that is ignored"
+            };
+            var member = ReflectionHelper.GetMemberExpression<Foo>(f => f.Bar);
+            MemberDescriptor memberDescriptor = new MemberDescriptor(member, "dummyName", "value that is ignored");
+
+            bool isIgnored = memberDescriptor.ShouldBeIgnoredWithValue("with this value is not ignored");
+
+            Assert.IsFalse(isIgnored);
+        }
+
+        [TestMethod]
+        public void ignore_with_exactly_null_value()
+        {
+            Foo foo = new Foo()
+            {
+                Bar = null
+            };
+            var member = ReflectionHelper.GetMemberExpression<Foo>(f => f.Bar);
+            MemberDescriptor memberDescriptor = new MemberDescriptor(member, "dummyName", null);
+
+            bool isIgnored = memberDescriptor.ShouldBeIgnoredWithValue(null);
+
+            Assert.IsTrue(isIgnored);
+        }
+
     }
 }
 

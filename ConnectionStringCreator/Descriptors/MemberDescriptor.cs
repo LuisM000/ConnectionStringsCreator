@@ -60,14 +60,14 @@ namespace ConnectionStringCreator.Descriptors
 
         public bool ShouldBeIgnored(object value)
         {
-            if (!this.canBeIgnored || this.IgnoredValues == null)
-                return false;
-
             var currentvalue = ReflectionHelper.GetPropertyValue(value, this.member.Member.Name);
-            if (this.IgnoredValues.Any(c =>(c==null && currentvalue==null) || (c!=null && c.Equals(currentvalue))))
-                return true;
 
-            return false;
+            return this.ShouldBeIgnoredWithValue(currentvalue);
+        }
+
+        public bool ShouldBeIgnoredWithValue(object value)
+        {
+            return this.CanBeIgnored() && this.ContainsIgnoredValue(value);
         }
 
         public object GetPropertyValue(object value)
@@ -84,6 +84,15 @@ namespace ConnectionStringCreator.Descriptors
             {
                 throw new ArgumentException(string.Format("Duplicate mapping for property {0} detected.", propertyMap.Value));
             }
+        }
+
+        private bool CanBeIgnored()
+        {
+            return this.canBeIgnored && this.IgnoredValues!=null;
+        }
+        private bool ContainsIgnoredValue(object value)
+        {
+            return this.IgnoredValues.Any(c => (c == null && value == null) || (c != null && c.Equals(value)));
         }
     }
 

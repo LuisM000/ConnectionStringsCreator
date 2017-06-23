@@ -73,6 +73,11 @@ namespace ConnectionStringCreator
             }
         }
 
+        public bool IsIgnoredWithValue(Expression<Func<T, object>> expression, object value)
+        {
+            return this.GetMemberDescriptor(expression).ShouldBeIgnoredWithValue(value);
+        }
+
         public void AddStaticValues(string name, string value)
         {
             this.memberDescriptors.Add(new StaticMemberDescriptor(name,value));
