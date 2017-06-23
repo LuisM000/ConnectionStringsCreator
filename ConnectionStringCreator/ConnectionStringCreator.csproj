@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builders\MySqlConnectionStringBuilder.cs" />
     <Compile Include="Builders\SqlServerConnectionStringBuilder.cs" />
     <Compile Include="ConnectionStringBase.cs" />
     <Compile Include="Descriptors\MemberDescriptor.cs" />
